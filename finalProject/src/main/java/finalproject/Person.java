@@ -12,8 +12,11 @@ public class Person {
     int infected;
     int infectedTimer;
     int immunityTimer;
+    int socialGroupSize;
+    int socialGroupSize2;
     double vaccinationEffectiveness;
     int[] socialGroupConnections;
+    int[] socialGroupConnections2;
     int fullImmunity;
     public Person(){
         
@@ -29,35 +32,43 @@ public class Person {
         infectedTimer = 0;
         immunityTimer = 0;
         vaccinationEffectiveness = 0;
+        socialGroupSize2 = 0;
         socialGroupConnections = new int[socialGroupSize];
-        
+        socialGroupConnections2 = new int[999];
     }
+   
+    
     
     public void setInfected(){
-       
-        infected = 1;
-        
+        infected = 1;        
     }
     
-    public void infectionCountdown(){
-        if(infectedTimer == 0){
-        infectedTimer = 5;
-        }
-        else{
+    
+        //TODO: take an integer argument, so the timer can last a custom amount.
+    public void infectionCountdown(int timer){    
+        infectedTimer = timer;    
+        infected = 1;
+    }
+    
+        public void infectionCountdown(){
+
             infectedTimer--;
             if(infectedTimer == 0){
+                
                 infected = 0;
                 
             }
+            
         }
         
-    }
+    
     
     public void setImmunity(){
         
     fullImmunity = 1;    
         
     }
+    
     
     public void immunityCountdown(int timer){
         if(immunityTimer == 0){
@@ -76,20 +87,22 @@ public class Person {
         
     }
     
+
     public void decrementInfection(){
         
         //decrement how long someone still has to be infected,if its 0 change infection status. 
-        if(infectedTimer > 0){            
-            infectedTimer--;            
+        if(infectedTimer > 0){      
+            infectedTimer--;
+        }      
+                        
             if(infectedTimer == 0){
                 infected = 0;               
             }          
-        }
         
-        else{
-            System.out.println("Logical error, infection status cannot be negative.");
-        }
+        
+      
         
     }
+    
     
 }
