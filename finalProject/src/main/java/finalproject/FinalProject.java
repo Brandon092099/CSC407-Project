@@ -40,7 +40,7 @@ import java.io.IOException;
 public class FinalProject {
 
     public static void main(String[] args) {
-        fifthExperiment();
+        fourthExperiment();
     }
 
     //step 1-4;
@@ -393,11 +393,11 @@ public class FinalProject {
         
         //declare necessary variables.
         int N = 1000;
-        double beta = .15;
-        double gamma = .4;
-        double alpha = .2;
+        double beta = .05;
+        double gamma = .1;
+        double alpha = .1;
         Random random = new Random();
-        random.setSeed(54);
+        random.setSeed(34322);
 
         Person[] population = new Person[1000];
         //We could waste time checking every single persons infection status, or we could keep an array of indexes of which people are infected. After clearing someone from the index, likely should 
@@ -556,7 +556,8 @@ public class FinalProject {
                                     break;
 
                                 }
-                                population[connection].infectionCountdown(10);
+                                int countdown = random.nextInt(20);
+                                population[connection].infectionCountdown(countdown);
 
                             }
 
@@ -583,7 +584,7 @@ public class FinalProject {
 
         JFreeChart chart = ChartFactory.createXYLineChart(title, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
         try {
-            ChartUtils.saveChartAsPNG(new File("XYPlot3.png"), chart, 450, 400);
+            ChartUtils.saveChartAsPNG(new File("XYPlot4.png"), chart, 450, 400);
         } catch (IOException ex) {
 
         }
@@ -602,16 +603,16 @@ public class FinalProject {
 
         //declare necessary variables.
         int N = 1000;
-        double beta = .05;
-        double gamma = .4;
+        double beta = .01;
+        double gamma = .05;
         //p in G(n,p)
-        double alpha = .2;
-        double theta = .1;
-        double v1 = .3;
+        double alpha = .1;
+        double theta = .05;
+        double v1 = .6;
         double v2 = .6;
         int v = 0;
         Random random = new Random();
-        random.setSeed(857858);
+        random.setSeed(343);
 
         Person[] population = new Person[1000];
         //We could waste time checking every single persons infection status, or we could keep an array of indexes of which people are infected. After clearing someone from the index, likely should 
@@ -785,7 +786,8 @@ public class FinalProject {
                                         break;
 
                                     }
-                                    population[connection].infectionCountdown(10);
+                                    int countdown = random.nextInt(20);
+                                    population[connection].infectionCountdown(countdown);
 
                                 }
 
@@ -812,7 +814,7 @@ public class FinalProject {
 
         JFreeChart chart = ChartFactory.createXYLineChart(title, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, showLegend, createTooltip, createURL);
         try {
-            ChartUtils.saveChartAsPNG(new File("XYPlot4.png"), chart, 450, 400);
+            ChartUtils.saveChartAsPNG(new File("XYPlot5.png"), chart, 450, 400);
         } catch (IOException ex) {
 
         }
@@ -831,17 +833,17 @@ public class FinalProject {
 
         //declare necessary variables.
         int N = 1000;
-        double beta = .15;
-        double gamma = .4;
+        double beta = .01;
+        double gamma = .05;
         //p in G(n,p)
-        double alpha = .2;
-        double theta = .05;
-        double v1 = .4;
+        double alpha = .1;
+        double theta = .01;
+        double v1 = .6;
         double v2 = .6;
         int v = 0;
-        double wearoff = .01;
+        double wearoff = .07;
         Random random = new Random();
-        random.setSeed(54);
+        random.setSeed(64237);
 
         Person[] population = new Person[1000];
         //We could waste time checking every single persons infection status, or we could keep an array of indexes of which people are infected. After clearing someone from the index, likely should 
@@ -908,8 +910,27 @@ public class FinalProject {
 
         }
 
+        
+        
+        
         //go through the simulation
         for (int iteration = 0; iteration < 2000; iteration++) {
+            
+                        //vaccination wearoff effect
+            if (iteration > 4) {
+
+                for (int subject = 0; subject < population.length; subject++) {
+
+                    if (population[subject].vaccinationEffectiveness > 0) {
+
+                        population[subject].vaccinationEffectiveness -= wearoff;
+
+                    }
+
+                }
+
+            }
+            
             //Who gets the booster? 
             if (iteration > 3) {
                 for (int subject = 0; subject < population.length; subject++) {
@@ -923,20 +944,7 @@ public class FinalProject {
 
                 }
             }
-            //vaccination wearoff effect
-            if (iteration > 3) {
 
-                for (int subject = 0; subject < population.length; subject++) {
-
-                    if (population[subject].vaccinationEffectiveness > 0) {
-
-                        population[subject].vaccinationEffectiveness -= wearoff;
-
-                    }
-
-                }
-
-            }
 
             numInfectedThisRound = 0;
             //remove holes from arrays
@@ -1029,7 +1037,8 @@ public class FinalProject {
                                         break;
 
                                     }
-                                    population[connection].infectionCountdown(10);
+                                    int countdown = random.nextInt(20);
+                                    population[connection].infectionCountdown(countdown);
 
                                 }
 
@@ -1077,17 +1086,17 @@ public class FinalProject {
         //declare necessary variables.
         int N = 1000;
         double beta = .15;
-        double gamma = .4;
+        double gamma = .1;
         //p in G(n,p)
         double alpha = .2;
         double alphaScalar = 1.3;
-        double theta = .05;
-        double v1 = .3;
+        double theta = .01;
+        double v1 = .6;
         double v2 = .6;
         int v = 0;
         double wearoff = .01;
         Random random = new Random();
-        random.setSeed(44);
+        random.setSeed(7345);
 
         Person[] population = new Person[1000];
         //We could waste time checking every single persons infection status, or we could keep an array of indexes of which people are infected. After clearing someone from the index, likely should 
@@ -1300,7 +1309,7 @@ public class FinalProject {
                 //go through there social connections
                 for (int i = 0; i < count; i++) {
                     int connection = random.nextInt(population[subject].socialGroupSize2);
-                    if (random.nextInt(100) < (int) (population[connection].vaccinationEffectiveness * 100)) {
+                    if (random.nextInt(100) > (int) (population[connection].vaccinationEffectiveness * 100)) {
                         if (random.nextInt(100) > (int) (beta * 100)) {
                             if (population[connection].infected == 0 && population[connection].immunityTimer == 0) {
 
@@ -1312,7 +1321,9 @@ public class FinalProject {
                                         break;
 
                                     }
-                                    population[connection].infectionCountdown(10);
+                                    int countdown = random.nextInt(20);
+                                    population[connection].infectionCountdown(countdown);
+
 
                                 }
 
